@@ -44,11 +44,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <div id="header" class="relative flex justify-between items-center">
 
                 <a id="header-logo" class="block my-4 max-w-xs sm:max-w-full leading-none" href="<?php echo (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? '') . dirname($_SERVER['PHP_SELF'] ?? ''); ?>">
-                    <img class="block max-w-full h-20 mt-4 mb-4" alt="DEMO Logo" src="./themes/Default/img/logo.png" style="max-height:100px;">
+                    <img class="block max-w-full h-20 mt-4 mb-4" alt="DEMO Logo" src="./themes/ElevenEdu/img/logo.png" style="max-height:100px;">
                 </a>
 
-                <div class="flex-grow flex items-center justify-end text-right text-sm text-purple-200">               
-                </div> 
+                <div class="flex-grow flex items-center justify-end text-right text-sm text-purple-200">
+                </div>
             </div>
         </div>
 

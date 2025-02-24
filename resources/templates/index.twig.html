@@ -28,7 +28,7 @@ TODO: add template variable details.
                 <div id="header" class="relative flex justify-between items-center">
 
                     <a id="header-logo" class="block my-4 max-w-xs sm:max-w-full leading-none" href="{{ absoluteURL }}">
-                        <img class="block max-w-full {{ isLoggedIn ? 'h-12' : 'h-20 mt-4 mb-4' }}" alt="{{ organisationName }} Logo" src="{{ absoluteURL }}/{{ organisationLogo|default("themes/Default/img/logo.png")|trim('/', 'left') }}" style="max-height:100px;" />
+                        <img class="block max-w-full {{ isLoggedIn ? 'h-12' : 'h-20 mt-4 mb-4' }}" alt="{{ organisationName }} Logo" src="{{ absoluteURL }}/{{ organisationLogo|default("themes/ElevenEdu/img/logo.png")|trim('/', 'left') }}" style="max-height:100px;" />
                     </a>
 
                     <div class="flex-grow flex items-center justify-end text-right text-sm text-{{ themeColour }}-200">
@@ -122,7 +122,7 @@ TODO: add template variable details.
                                 {{ include('page.twig.html') }}
 
                                 {{ content|join("\n")|raw }}
-                                
+
                             {% endblock %}
                         </div>
                     </div>
@@ -139,13 +139,11 @@ TODO: add template variable details.
                 {% endblock afterPage %}
             </div>
 
-            
+
 
             {% block footer %}
                 <div class="relative text-sm text-gray-700 px-6 lg:px-12 mt-4 pt-2 pb-6 leading-normal border-t border-gray-300 {{ rightToLeft ? 'text-right' : 'text-left' }}">
                     {{ include('footer.twig.html') }}
-
-                    <img class="absolute top-0 -mt-1 hidden sm:block w-32 {{ rightToLeft ? 'left-0 sm:ml-0 md:ml-16' : 'right-0 sm:mr-0 md:mr-16' }}" alt="Logo text-xs" src="{{ absoluteURL }}/themes/{{ gibbonThemeName|default("Default") }}/img/gibbon-white.svg"/>
                 </div>
             {% endblock %}
 
