@@ -12,7 +12,7 @@ class AssignmentInfoBox extends StatelessWidget {
     final theme = Theme.of(context);
     return BaseInfoBox(
       margin: const EdgeInsets.only(bottom: 16),
-      color: infoBoxColor ?? theme.colorScheme.secondary.withValues(alpha: 0.1),
+      color: infoBoxColor ?? theme.colorScheme.secondary.withValues(alpha: 0x1A),
       child: Row(
         children: [
           Icon(Icons.info, color: iconColor ?? theme.colorScheme.secondary),

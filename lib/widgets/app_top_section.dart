@@ -25,7 +25,7 @@ class AppTopSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          color: Colors.white,
+          color: theme.colorScheme.surface,
           padding: padding ?? const EdgeInsets.fromLTRB(16, 40, 16, 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class AppTopSection extends StatelessWidget {
                   child: Text(
                     subtitle!,
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey,
+                      color: theme.hintColor,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -52,7 +52,7 @@ class AppTopSection extends StatelessWidget {
                       style: theme.textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 32,
-                        color: Colors.black,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                   ),

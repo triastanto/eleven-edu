@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'base_card_container.dart';
 import 'base_info_box.dart';
+import '../theme/app_colors.dart';
 
 class AnnouncementCard extends StatelessWidget {
   final String title;
@@ -19,10 +20,11 @@ class AnnouncementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final appColors = theme.extension<AppColors>();
     return BaseCardContainer(
       padding: const EdgeInsets.all(12),
       child: BaseInfoBox(
-        color: infoBoxColor ?? theme.colorScheme.secondary.withValues(alpha: 0.2),
+        color: infoBoxColor ?? appColors?.announcementInfoBox ?? theme.colorScheme.secondary.withValues(alpha: 0.2),
         padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

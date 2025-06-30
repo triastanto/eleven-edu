@@ -91,76 +91,79 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           ))
       .toList();
 
-  List<Widget> _buildTopSections(BuildContext context) => [
-        // Dashboard
-        AppTopSection(
-          title: 'Dashboard',
-          subtitle: 'Hi, Nama Murid/Orang Tua',
-          leading: null,
-          actions: [
-            IconButton(
-              icon: Stack(
-                children: [
-                  const Icon(Icons.notifications_none_outlined, size: 28),
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 1.5),
-                      ),
+  List<Widget> _buildTopSections(BuildContext context) {
+    final theme = Theme.of(context);
+    return [
+      // Dashboard
+      AppTopSection(
+        title: 'Dashboard',
+        subtitle: 'Hi, Nama Murid/Orang Tua',
+        leading: null,
+        actions: [
+          IconButton(
+            icon: Stack(
+              children: [
+                Icon(Icons.notifications_none_outlined, size: 28, color: theme.iconTheme.color),
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.error,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: theme.colorScheme.surface, width: 1.5),
                     ),
                   ),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            const SizedBox(width: 8),
-            const CircleAvatar(
-              radius: 20,
-              backgroundImage: AssetImage('assets/profile_student.png'),
-            ),
-          ],
-          padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
-        ),
-        // Assignment
-        AppTopSection(
-          title: 'Daftar Tugas',
-          leading: const Icon(Icons.menu_book_rounded, color: Colors.orange, size: 32),
-          bottom: Container(
-            color: Colors.white,
-            child: TabBar(
-              controller: _assignmentTabController,
-              labelColor: Colors.orange,
-              unselectedLabelColor: Colors.grey,
-              indicatorColor: Colors.orange,
-              indicatorWeight: 2.5,
-              labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-              tabs: const [
-                Tab(text: 'All'),
-                Tab(text: 'Submitted'),
-                Tab(text: 'Overdue'),
+                ),
               ],
             ),
+            onPressed: () {},
+          ),
+          const SizedBox(width: 8),
+          const CircleAvatar(
+            radius: 20,
+            backgroundImage: AssetImage('assets/profile_student.png'),
+          ),
+        ],
+        padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+      ),
+      // Assignment
+      AppTopSection(
+        title: 'Daftar Tugas',
+        leading: Icon(Icons.menu_book_rounded, color: theme.colorScheme.primary, size: 32),
+        bottom: Container(
+          color: theme.colorScheme.surface,
+          child: TabBar(
+            controller: _assignmentTabController,
+            labelColor: theme.colorScheme.primary,
+            unselectedLabelColor: theme.hintColor,
+            indicatorColor: theme.colorScheme.primary,
+            indicatorWeight: 2.5,
+            labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+            tabs: const [
+              Tab(text: 'All'),
+              Tab(text: 'Submitted'),
+              Tab(text: 'Overdue'),
+            ],
           ),
         ),
-        // Attendance
-        const AppTopSection(
-          title: 'Kehadiran',
-          leading: Icon(Icons.person, color: Colors.orange),
-          padding: EdgeInsets.fromLTRB(16, 40, 16, 16),
-        ),
-        // Calendar
-        const AppTopSection(
-          title: 'Calendar',
-          leading: Icon(Icons.calendar_today, color: Colors.orange),
-          padding: EdgeInsets.fromLTRB(16, 40, 16, 16),
-        ),
-      ];
+      ),
+      // Attendance
+      AppTopSection(
+        title: 'Kehadiran',
+        leading: Icon(Icons.person, color: theme.colorScheme.primary),
+        padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+      ),
+      // Calendar
+      AppTopSection(
+        title: 'Calendar',
+        leading: Icon(Icons.calendar_today, color: theme.colorScheme.primary),
+        padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+      ),
+    ];
+  }
 
   List<Widget> get _widgetOptions => [
         const DashboardScreen(),
