@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/assignment_info_box.dart';
 import '../widgets/assignment_card.dart';
+import '../widgets/app_top_section.dart';
 
 /// Assignment screen
 class AssignmentScreen extends StatefulWidget {
@@ -102,39 +103,25 @@ class AssignmentHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          color: Colors.white,
-          padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
-          child: Row(
-            children: [
-              const Icon(Icons.menu_book_rounded, color: Colors.orange, size: 32),
-              const SizedBox(width: 8),
-              Text('Daftar Tugas', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-            ],
-          ),
+    return AppTopSection(
+      title: 'Daftar Tugas',
+      leading: const Icon(Icons.menu_book_rounded, color: Colors.orange, size: 32),
+      bottom: Container(
+        color: Colors.white,
+        child: TabBar(
+          controller: tabController,
+          labelColor: Colors.orange,
+          unselectedLabelColor: Colors.grey,
+          indicatorColor: Colors.orange,
+          indicatorWeight: 2.5,
+          labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+          tabs: const [
+            Tab(text: 'All'),
+            Tab(text: 'Submitted'),
+            Tab(text: 'Overdue'),
+          ],
         ),
-        Container(
-          color: Colors.white,
-          child: TabBar(
-            controller: tabController,
-            labelColor: Colors.orange,
-            unselectedLabelColor: Colors.grey,
-            indicatorColor: Colors.orange,
-            indicatorWeight: 2.5,
-            labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-            tabs: const [
-              Tab(text: 'All'),
-              Tab(text: 'Submitted'),
-              Tab(text: 'Overdue'),
-            ],
-          ),
-        ),
-        const Divider(height: 1),
-      ],
+      ),
     );
   }
 }

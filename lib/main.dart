@@ -7,7 +7,7 @@ import 'screens/dashboard_screen.dart';
 import 'screens/assignment_screen.dart';
 import 'screens/attendance_screen.dart';
 import 'screens/calendar_screen.dart';
-import 'widgets/simple_top_section.dart';
+import 'widgets/app_top_section.dart';
 
 /// Entry point of the application.
 void main() {
@@ -93,31 +93,33 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   List<Widget> _buildTopSections(BuildContext context) => [
         // Dashboard
-        SimpleTopSection(
+        AppTopSection(
           title: 'Dashboard',
+          subtitle: 'Hi, Nama Murid/Orang Tua',
           leading: null,
           actions: [
-            Stack(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.notifications_none_outlined),
-                  onPressed: () {},
-                ),
-                Positioned(
-                  right: 10,
-                  top: 10,
-                  child: Container(
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 1.5),
+            IconButton(
+              icon: Stack(
+                children: [
+                  const Icon(Icons.notifications_none_outlined, size: 28),
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 1.5),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
+              onPressed: () {},
             ),
+            const SizedBox(width: 8),
             const CircleAvatar(
               radius: 20,
               backgroundImage: AssetImage('assets/profile_student.png'),
@@ -126,11 +128,38 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
         ),
         // Assignment
-        AssignmentHeader(tabController: _assignmentTabController),
+        AppTopSection(
+          title: 'Daftar Tugas',
+          leading: const Icon(Icons.menu_book_rounded, color: Colors.orange, size: 32),
+          bottom: Container(
+            color: Colors.white,
+            child: TabBar(
+              controller: _assignmentTabController,
+              labelColor: Colors.orange,
+              unselectedLabelColor: Colors.grey,
+              indicatorColor: Colors.orange,
+              indicatorWeight: 2.5,
+              labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              tabs: const [
+                Tab(text: 'All'),
+                Tab(text: 'Submitted'),
+                Tab(text: 'Overdue'),
+              ],
+            ),
+          ),
+        ),
         // Attendance
-        const SimpleTopSection(title: 'Attendance'),
+        const AppTopSection(
+          title: 'Kehadiran',
+          leading: Icon(Icons.person, color: Colors.orange),
+          padding: EdgeInsets.fromLTRB(16, 40, 16, 16),
+        ),
         // Calendar
-        const SimpleTopSection(title: 'Calendar'),
+        const AppTopSection(
+          title: 'Calendar',
+          leading: Icon(Icons.calendar_today, color: Colors.orange),
+          padding: EdgeInsets.fromLTRB(16, 40, 16, 16),
+        ),
       ];
 
   List<Widget> get _widgetOptions => [

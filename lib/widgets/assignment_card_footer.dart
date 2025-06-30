@@ -36,7 +36,7 @@ class AssignmentCardFooter extends StatelessWidget {
         if (showUpload)
           Padding(
             padding: const EdgeInsets.only(left: 8),
-            child: AssignmentUploadButton(isOverdue: isOverdue),
+            child: AssignmentUploadButton(isOverdue: isOverdue, onPressed: () {}),
           ),
       ],
     );
