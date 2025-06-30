@@ -79,26 +79,70 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Only used in DashboardScreen, but kept here for demonstration
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+      appBar: null, // Remove default AppBar
+      body: Column(
+        children: [
+          // Custom top section
+          Container(
+            padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hi, Nama Murid/Orang Tua',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        'Dashboard',
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                Stack(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.notifications_none_outlined),
+                      onPressed: () {},
+                    ),
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 1.5),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const CircleAvatar(
+                  radius: 20,
+                  backgroundImage: AssetImage('assets/profile_student.png'),
+                ),
+              ],
+            ),
+          ),
+          const Divider(height: 1),
+          // Expanded area for tab content
+          Expanded(
+            child: _widgetOptions[_selectedIndex],
+          ),
+        ],
       ),
-      body: _widgetOptions[_selectedIndex],
-      floatingActionButton: _selectedIndex == 0
-          ? FloatingActionButton(
-              onPressed: () => context.read<CounterProvider>().increment(),
-              tooltip: 'Increment',
-              child: const Icon(Icons.add),
-            )
-          : null,
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
         items: _bottomNavItems,
         currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),
     );
