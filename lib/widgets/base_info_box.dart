@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class BaseCardContainer extends StatelessWidget {
+class BaseInfoBox extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
   final Color? color;
 
-  const BaseCardContainer({
+  const BaseInfoBox({
     super.key,
     required this.child,
     this.margin,
@@ -19,18 +19,10 @@ class BaseCardContainer extends StatelessWidget {
     final theme = Theme.of(context);
     return Container(
       margin: margin,
-      padding: padding,
+      padding: padding ?? const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: color ?? theme.cardColor,
+        color: color ?? theme.colorScheme.secondary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: theme.dividerColor.withValues(alpha: 0.3)),
-        boxShadow: [
-          BoxShadow(
-            color: theme.shadowColor.withValues(alpha: 0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: child,
     );

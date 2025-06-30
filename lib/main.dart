@@ -7,6 +7,7 @@ import 'screens/dashboard_screen.dart';
 import 'screens/assignment_screen.dart';
 import 'screens/attendance_screen.dart';
 import 'screens/calendar_screen.dart';
+import 'widgets/simple_top_section.dart';
 
 /// Entry point of the application.
 void main() {
@@ -40,35 +41,103 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int _selectedIndex = 0;
+  late TabController _assignmentTabController;
 
-  /// Returns the list of widgets for each tab.
-  List<Widget> get _widgetOptions => const <Widget>[
-        DashboardScreen(),
-        AssignmentScreen(),
-        AttendanceScreen(),
-        CalendarScreen(),
+  @override
+  void initState() {
+    super.initState();
+    _assignmentTabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _assignmentTabController.dispose();
+    super.dispose();
+  }
+
+  static const _tabData = [
+    {
+      'icon': Icon(Icons.dashboard),
+      'label': AppStrings.dashboard,
+      'top': 'dashboard',
+      'body': DashboardScreen(),
+    },
+    {
+      'icon': Icon(Icons.assignment),
+      'label': AppStrings.assignment,
+      'top': 'assignment',
+      'body': null, // handled below
+    },
+    {
+      'icon': Icon(Icons.check_circle),
+      'label': AppStrings.attendance,
+      'top': 'attendance',
+      'body': AttendanceScreen(),
+    },
+    {
+      'icon': Icon(Icons.calendar_today),
+      'label': AppStrings.calendar,
+      'top': 'calendar',
+      'body': CalendarScreen(),
+    },
+  ];
+
+  List<BottomNavigationBarItem> get _bottomNavItems => _tabData
+      .map((tab) => BottomNavigationBarItem(
+            icon: tab['icon'] as Icon,
+            label: tab['label'] as String,
+          ))
+      .toList();
+
+  List<Widget> _buildTopSections(BuildContext context) => [
+        // Dashboard
+        SimpleTopSection(
+          title: 'Dashboard',
+          leading: null,
+          actions: [
+            Stack(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.notifications_none_outlined),
+                  onPressed: () {},
+                ),
+                Positioned(
+                  right: 10,
+                  top: 10,
+                  child: Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 1.5),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage('assets/profile_student.png'),
+            ),
+          ],
+          padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+        ),
+        // Assignment
+        AssignmentHeader(tabController: _assignmentTabController),
+        // Attendance
+        const SimpleTopSection(title: 'Attendance'),
+        // Calendar
+        const SimpleTopSection(title: 'Calendar'),
       ];
 
-  /// Returns the list of BottomNavigationBarItems.
-  List<BottomNavigationBarItem> get _bottomNavItems => const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.dashboard),
-          label: AppStrings.dashboard,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.assignment),
-          label: AppStrings.assignment,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.check_circle),
-          label: AppStrings.attendance,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_today),
-          label: AppStrings.calendar,
-        ),
+  List<Widget> get _widgetOptions => [
+        const DashboardScreen(),
+        AssignmentScreen(tabController: _assignmentTabController),
+        const AttendanceScreen(),
+        const CalendarScreen(),
       ];
 
   void _onItemTapped(int index) {
@@ -79,62 +148,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final topSections = _buildTopSections(context);
     return Scaffold(
-      appBar: null, // Remove default AppBar
+      appBar: null,
       body: Column(
         children: [
-          // Custom top section
-          Container(
-            padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hi, Nama Murid/Orang Tua',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        'Dashboard',
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Stack(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.notifications_none_outlined),
-                      onPressed: () {},
-                    ),
-                    Positioned(
-                      right: 10,
-                      top: 10,
-                      child: Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 1.5),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const CircleAvatar(
-                  radius: 20,
-                  backgroundImage: AssetImage('assets/profile_student.png'),
-                ),
-              ],
-            ),
-          ),
+          topSections[_selectedIndex],
           const Divider(height: 1),
-          // Expanded area for tab content
           Expanded(
             child: _widgetOptions[_selectedIndex],
           ),
