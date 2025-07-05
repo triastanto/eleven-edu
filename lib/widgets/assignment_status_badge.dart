@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_strings.dart';
 
 class AssignmentStatusBadge extends StatelessWidget {
   final String status;
@@ -17,9 +18,9 @@ class AssignmentStatusBadge extends StatelessWidget {
       ),
       child: Row(
         children: [
-          if (status == 'Submitted')
+          if (status == AppStrings.submitted)
             Icon(Icons.check_circle, color: statusColor, size: 16),
-          if (status == 'Overdue')
+          if (status == AppStrings.overdue)
             Icon(Icons.error, color: statusColor, size: 16),
           const SizedBox(width: 4),
           Text(status, style: theme.textTheme.bodySmall?.copyWith(color: statusColor, fontWeight: FontWeight.w600)),

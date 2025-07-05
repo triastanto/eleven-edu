@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import '../constants/app_strings.dart';
+import '../services/navigation_service.dart';
+import '../theme/app_colors.dart';
 
 /// Calendar screen
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
+
+  void _onMorePressed(BuildContext context) {
+    NavigationService.showMoreOptions(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +23,10 @@ class CalendarScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.calendar_today, color: theme.colorScheme.primary, size: 32),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppStrings.defaultSpacing),
             Flexible(
               child: Text(
-                'Calendar',
+                AppStrings.calendar,
                 style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -31,9 +38,7 @@ class CalendarScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.more_vert),
             color: theme.iconTheme.color,
-            onPressed: () {
-              // Implement more action
-            },
+            onPressed: () => _onMorePressed(context),
           ),
         ],
       ),
@@ -53,13 +58,13 @@ class _CalendarBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: AppStrings.defaultSpacing, vertical: AppStrings.defaultSpacing),
         child: Column(
           children: [
             _CalendarMonthSelector(),
-            SizedBox(height: 8),
+            SizedBox(height: AppStrings.defaultSpacing),
             _CalendarGrid(),
-            SizedBox(height: 16),
+            SizedBox(height: AppStrings.largeSpacing),
             _EventList(),
           ],
         ),
@@ -81,12 +86,12 @@ class _CalendarMonthSelector extends StatelessWidget {
           icon: const Icon(Icons.chevron_left),
           onPressed: () {},
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: AppStrings.defaultSpacing),
         Text(
           'Juli 2025',
           style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: AppStrings.defaultSpacing),
         IconButton(
           icon: const Icon(Icons.chevron_right),
           onPressed: () {},
@@ -99,9 +104,20 @@ class _CalendarMonthSelector extends StatelessWidget {
 class _CalendarGrid extends StatelessWidget {
   const _CalendarGrid();
 
-  Color _yellow(BuildContext context) => Theme.of(context).colorScheme.primary.withAlpha(40); // light yellow
-  Color _dotBlue(BuildContext context) => const Color(0xFF00B4D8);
-  Color _dotOrange(BuildContext context) => const Color(0xFFFFA500);
+  Color _yellow(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    return appColors?.calendarBackground ?? Theme.of(context).colorScheme.primary.withAlpha(40);
+  }
+  
+  Color _dotBlue(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    return appColors?.eventDotBlue ?? const Color(0xFF00B4D8);
+  }
+  
+  Color _dotOrange(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    return appColors?.eventDotOrange ?? const Color(0xFFFFA500);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,9 +174,9 @@ class _CalendarGrid extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: _yellow(context),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppStrings.extraLargeSpacing),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: AppStrings.defaultSpacing),
       child: Column(
         children: [
           Row(
@@ -176,7 +192,7 @@ class _CalendarGrid extends StatelessWidget {
                     ))
                 .toList(),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppStrings.defaultSpacing),
           ...weeks.map((week) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: Row(
@@ -263,11 +279,11 @@ class _EventList extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      margin: const EdgeInsets.only(top: 8),
-      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top: AppStrings.defaultSpacing),
+      padding: const EdgeInsets.all(AppStrings.defaultSpacing),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(10),
@@ -282,14 +298,14 @@ class _EventList extends StatelessWidget {
           Row(
             children: [
               Icon(Icons.calendar_today, size: 20, color: theme.colorScheme.primary),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppStrings.defaultSpacing),
               Text(
                 'Events tanggal 3 Juni 2025',
                 style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppStrings.defaultSpacing),
           const _EventCard(
             icon: Icons.science,
             iconColor: Color(0xFFB68900),
@@ -297,7 +313,7 @@ class _EventList extends StatelessWidget {
             time: '07:30 AM - 09:00 AM',
             location: 'Laboratorium Biologi',
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppStrings.defaultSpacing),
           const _EventCard(
             icon: Icons.science_outlined,
             iconColor: Color(0xFF009688),
@@ -331,13 +347,13 @@ class _EventCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: theme.colorScheme.primary.withAlpha(40),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
       ),
       padding: const EdgeInsets.all(12),
       child: Row(
         children: [
           Icon(icon, color: iconColor, size: 28),
-          const SizedBox(width: 12),
+          const SizedBox(width: AppStrings.defaultSpacing),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -358,18 +374,18 @@ class _EventCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppStrings.defaultSpacing),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               foregroundColor: theme.colorScheme.primary,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              padding: const EdgeInsets.symmetric(horizontal: AppStrings.largeSpacing, vertical: AppStrings.defaultSpacing),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppStrings.defaultSpacing)),
               elevation: 0,
               textStyle: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             onPressed: () {},
-            child: const Text('Details'),
+            child: const Text(AppStrings.details),
           ),
         ],
       ),

@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import '../widgets/app_top_section.dart';
-import '../screens/profile_student_screen.dart';
-import '../screens/announcement_screen.dart';
+import '../constants/app_strings.dart';
+import '../services/navigation_service.dart';
 
 class DashboardHeader extends StatelessWidget {
   const DashboardHeader({super.key});
+
+  void _onNotificationPressed(BuildContext context) {
+    NavigationService.navigateToAnnouncements(context);
+  }
+
+  void _onProfilePressed(BuildContext context) {
+    NavigationService.navigateToProfile(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return AppTopSection(
-      title: 'Dashboard',
-      subtitle: 'Hi, Nama Murid/Orang Tua',
+      title: AppStrings.dashboard,
+      subtitle: AppStrings.greeting,
       leading: null,
       actions: [
         IconButton(
@@ -33,30 +41,18 @@ class DashboardHeader extends StatelessWidget {
               ),
             ],
           ),
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AnnouncementScreen(),
-              ),
-            );
-          },
+          onPressed: () => _onNotificationPressed(context),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: AppStrings.defaultSpacing),
         GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const ProfileStudentScreen(),
-              ),
-            );
-          },
+          onTap: () => _onProfilePressed(context),
           child: const CircleAvatar(
             radius: 20,
             backgroundImage: AssetImage('assets/profile_student.jpg'),
           ),
         ),
       ],
-      padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+      padding: const EdgeInsets.fromLTRB(AppStrings.largeSpacing, 40, AppStrings.largeSpacing, AppStrings.defaultSpacing),
     );
   }
 }

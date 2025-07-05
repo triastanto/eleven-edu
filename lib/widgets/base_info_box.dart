@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_strings.dart';
 
 class BaseInfoBox extends StatelessWidget {
   final Widget child;
@@ -22,7 +23,7 @@ class BaseInfoBox extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: color ?? theme.colorScheme.secondary.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
       ),
       child: child,
     );

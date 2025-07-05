@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_strings.dart';
 
 class AttendanceRangeDropdown extends StatelessWidget {
   final String value;
@@ -26,15 +27,15 @@ class AttendanceRangeDropdown extends StatelessWidget {
       onChanged: onChanged,
       decoration: InputDecoration(
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            const EdgeInsets.symmetric(horizontal: AppStrings.largeSpacing, vertical: 12),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
             borderSide: BorderSide(color: theme.dividerColor)),
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
             borderSide: BorderSide(color: theme.dividerColor)),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
             borderSide: BorderSide(color: theme.colorScheme.primary)),
         fillColor: theme.inputDecorationTheme.fillColor,
         filled: theme.inputDecorationTheme.filled,

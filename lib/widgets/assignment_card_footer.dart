@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'assignment_status_badge.dart';
 import 'assignment_upload_button.dart';
+import '../constants/app_strings.dart';
 
 class AssignmentCardFooter extends StatelessWidget {
   final String due;
@@ -29,13 +30,13 @@ class AssignmentCardFooter extends StatelessWidget {
       children: [
         Icon(Icons.calendar_today_rounded, size: 18, color: iconColor ?? theme.iconTheme.color),
         const SizedBox(width: 6),
-        Text('Batas: $due', style: theme.textTheme.bodyMedium?.copyWith(color: textColor ?? theme.hintColor)),
+        Text('${AppStrings.dueDate}$due', style: theme.textTheme.bodyMedium?.copyWith(color: textColor ?? theme.hintColor)),
         const Spacer(),
         if (status.isNotEmpty)
           AssignmentStatusBadge(status: status, statusColor: statusColor),
         if (showUpload)
           Padding(
-            padding: const EdgeInsets.only(left: 8),
+            padding: const EdgeInsets.only(left: AppStrings.defaultSpacing),
             child: AssignmentUploadButton(isOverdue: isOverdue, onPressed: () {}),
           ),
       ],

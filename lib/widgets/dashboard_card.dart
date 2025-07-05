@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dashboard_card_item.dart';
 import 'base_card_container.dart';
+import '../constants/app_strings.dart';
 
 class DashboardCard extends StatelessWidget {
   final IconData icon;
@@ -20,21 +21,21 @@ class DashboardCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return BaseCardContainer(
-      margin: const EdgeInsets.only(bottom: 8),
+      margin: const EdgeInsets.only(bottom: AppStrings.defaultSpacing),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppStrings.largeSpacing),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Icon(icon, size: 28, color: theme.colorScheme.primary),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: AppStrings.defaultSpacing),
                     Text(
                       title,
                       style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -43,7 +44,7 @@ class DashboardCard extends StatelessWidget {
                     Icon(Icons.chevron_right_rounded, color: theme.iconTheme.color),
                   ],
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppStrings.defaultSpacing),
                 ...items,
               ],
             ),

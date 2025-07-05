@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_strings.dart';
 import 'base_card_container.dart';
 import 'base_info_box.dart';
 import '../theme/app_colors.dart';
@@ -11,9 +12,9 @@ class AnnouncementCard extends StatelessWidget {
 
   const AnnouncementCard({
     super.key,
-    this.title = 'Libur Kenaikan Kelas',
-    this.date = "Jum'at, 4 Juni 2025",
-    this.message = 'Diberitahukan untuk seluruh siswa, bahwa jadwal hari libur akan dimajukan di tanggal dan hari yang sudah ditentukan. Orang tua/ wali murid dimohon untuk memantau',
+    this.title = AppStrings.announcementDefaultTitle,
+    this.date = AppStrings.announcementDefaultDate,
+    this.message = AppStrings.announcementDefaultMessage,
     this.infoBoxColor,
   });
 
@@ -22,10 +23,10 @@ class AnnouncementCard extends StatelessWidget {
     final theme = Theme.of(context);
     final appColors = theme.extension<AppColors>();
     return BaseCardContainer(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(AppStrings.cardPadding),
       child: BaseInfoBox(
         color: infoBoxColor ?? appColors?.announcementInfoBox ?? theme.colorScheme.secondary.withValues(alpha: 0.2),
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(AppStrings.infoBoxPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

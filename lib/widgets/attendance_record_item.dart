@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'attendance_status_badge.dart';
+import '../constants/app_strings.dart';
 
 typedef OnTap = void Function();
 
@@ -40,13 +41,24 @@ class AttendanceRecordItem extends StatelessWidget {
     }
   }
 
+  String get _statusText {
+    switch (status) {
+      case AttendanceStatus.present:
+        return AppStrings.present;
+      case AttendanceStatus.late:
+        return AppStrings.late;
+      case AttendanceStatus.absent:
+        return AppStrings.absent;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: AppStrings.defaultSpacing),
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: theme.dividerColor.withValues(alpha: 0.2))),
         ),
@@ -59,7 +71,7 @@ class AttendanceRecordItem extends StatelessWidget {
                 Text(day, style: theme.textTheme.bodySmall?.copyWith(color: theme.hintColor)),
               ],
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: AppStrings.largeSpacing),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,16 +90,5 @@ class AttendanceRecordItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String get _statusText {
-    switch (status) {
-      case AttendanceStatus.present:
-        return 'Present';
-      case AttendanceStatus.late:
-        return 'Late';
-      case AttendanceStatus.absent:
-        return 'Absent';
-    }
   }
 }

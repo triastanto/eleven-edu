@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/assignment_info_box.dart';
 import '../widgets/assignment_card.dart';
 import '../widgets/app_top_section.dart';
+import '../constants/app_strings.dart';
+import '../services/navigation_service.dart';
 
 /// Assignment screen
 class AssignmentScreen extends StatefulWidget {
@@ -13,6 +15,10 @@ class AssignmentScreen extends StatefulWidget {
 }
 
 class _AssignmentScreenState extends State<AssignmentScreen> {
+  void _onMorePressed(BuildContext context) {
+    NavigationService.showMoreOptions(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -25,10 +31,10 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.assignment, color: theme.colorScheme.primary, size: 32),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppStrings.defaultSpacing),
             Flexible(
               child: Text(
-                'Daftar Tugas',
+                AppStrings.assignments,
                 style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -40,11 +46,22 @@ class _AssignmentScreenState extends State<AssignmentScreen> {
           IconButton(
             icon: const Icon(Icons.more_vert),
             color: theme.iconTheme.color,
-            onPressed: () {
-              // Implement more action
-            },
+            onPressed: () => _onMorePressed(context),
           ),
         ],
+        bottom: TabBar(
+          controller: widget.tabController,
+          labelColor: theme.colorScheme.primary,
+          unselectedLabelColor: theme.hintColor,
+          indicatorColor: theme.colorScheme.primary,
+          indicatorWeight: 2.5,
+          labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+          tabs: const [
+            Tab(text: 'Semua'),
+            Tab(text: 'Terkumpul'),
+            Tab(text: 'Terlambat'),
+          ],
+        ),
       ),
       body: TabBarView(
         controller: widget.tabController,
@@ -62,12 +79,12 @@ class _AllAssignmentsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: AppStrings.largeSpacing, vertical: AppStrings.defaultSpacing),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AssignmentInfoBox(
-            message: '2 PR harus selesai dalam minggu ini!',
+            message: AppStrings.assignmentInfo,
           ),
           AssignmentCard(
             icon: Icons.calculate_rounded,
@@ -76,7 +93,7 @@ class _AllAssignmentsTab extends StatelessWidget {
             desc: 'Probabilitas dan Statistik',
             due: '20 Juni 2025',
             type: 'PR',
-            status: 'Submitted',
+            status: AppStrings.submitted,
             statusColor: Colors.green,
             showUpload: false,
           ),
@@ -87,7 +104,7 @@ class _AllAssignmentsTab extends StatelessWidget {
             desc: 'Hasil Lab: Analisis Microba',
             due: '15 Juni 2025',
             type: 'Uji Praktek',
-            status: 'Overdue',
+            status: AppStrings.overdue,
             statusColor: Colors.red,
             showUpload: true,
             isOverdue: true,
@@ -119,7 +136,7 @@ class _AllAssignmentsTab extends StatelessWidget {
             desc: 'Probabilitas dan Statistik',
             due: '16 Juni 2025',
             type: 'Homework',
-            status: 'Submitted',
+            status: AppStrings.submitted,
             statusColor: Colors.green,
             showUpload: false,
           ),
@@ -136,7 +153,7 @@ class AssignmentHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppTopSection(
-      title: 'Daftar Tugas',
+      title: AppStrings.assignments,
       leading: const Icon(Icons.menu_book_rounded, color: Colors.orange, size: 32),
       bottom: Container(
         color: Colors.white,

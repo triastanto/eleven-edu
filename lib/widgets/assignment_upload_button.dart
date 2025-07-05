@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_strings.dart';
 
 class AssignmentUploadButton extends StatelessWidget {
   final bool isOverdue;
@@ -26,7 +27,7 @@ class AssignmentUploadButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         icon: const Icon(Icons.upload_rounded, size: 14),
-        label: const Text('Upload'),
+        label: const Text(AppStrings.upload),
       ),
     );
   }

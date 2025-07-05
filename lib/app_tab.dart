@@ -12,24 +12,24 @@ class AppTab {
 }
 
 final List<AppTab> appTabs = [
-  AppTab(
-    icon: const Icon(Icons.dashboard),
+  const AppTab(
+    icon: Icon(Icons.dashboard),
     label: AppStrings.dashboard,
-    body: const DashboardScreen(),
+    body: DashboardScreen(),
   ),
-  AppTab(
-    icon: const Icon(Icons.assignment),
+  const AppTab(
+    icon: Icon(Icons.assignment),
     label: AppStrings.assignment,
     body: null, // handled in home_page.dart
   ),
-  AppTab(
-    icon: const Icon(Icons.check_circle),
+  const AppTab(
+    icon: Icon(Icons.check_circle),
     label: AppStrings.attendance,
-    body: const AttendanceScreen(),
+    body: AttendanceScreen(),
   ),
-  AppTab(
-    icon: const Icon(Icons.calendar_today),
+  const AppTab(
+    icon: Icon(Icons.calendar_today),
     label: AppStrings.calendar,
-    body: const CalendarScreen(),
+    body: CalendarScreen(),
   ),
 ];

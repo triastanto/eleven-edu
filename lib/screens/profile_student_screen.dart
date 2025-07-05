@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import '../widgets/base_card_container.dart';
 import '../theme/app_colors.dart';
+import '../constants/app_strings.dart';
+import '../services/navigation_service.dart';
 
 class ProfileStudentScreen extends StatelessWidget {
   const ProfileStudentScreen({super.key});
+
+  void _onMorePressed(BuildContext context) {
+    NavigationService.showMoreOptions(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +21,16 @@ class ProfileStudentScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: theme.colorScheme.primary),
-          onPressed: () => Navigator.of(context).maybePop(),
+          onPressed: () => NavigationService.navigateBack(context),
         ),
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.person, color: theme.colorScheme.primary, size: 32),
-            const SizedBox(width: 8),
+            const SizedBox(width: AppStrings.defaultSpacing),
             Flexible(
               child: Text(
-                'Profile',
+                AppStrings.profile,
                 style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -36,9 +42,7 @@ class ProfileStudentScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.more_vert),
             color: theme.iconTheme.color,
-            onPressed: () {
-              // Implement more action
-            },
+            onPressed: () => _onMorePressed(context),
           ),
         ],
       ),
@@ -53,14 +57,14 @@ class _ProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: AppStrings.largeSpacing, vertical: AppStrings.defaultSpacing),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _ProfileCard(),
-          SizedBox(height: 24),
+          SizedBox(height: AppStrings.extraLargeSpacing),
           _StudentDetailsCard(),
-          SizedBox(height: 32),
+          SizedBox(height: AppStrings.sectionSpacing),
           _ProfileActions(),
         ],
       ),
@@ -76,7 +80,7 @@ class _ProfileCard extends StatelessWidget {
     final theme = Theme.of(context);
     final appColors = Theme.of(context).extension<AppColors>();
     return BaseCardContainer(
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: AppStrings.extraLargeSpacing, horizontal: AppStrings.largeSpacing),
       color: theme.cardColor,
       child: Column(
         children: [
@@ -84,11 +88,11 @@ class _ProfileCard extends StatelessWidget {
             radius: 48,
             backgroundImage: AssetImage('assets/profile_student.jpg'),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppStrings.largeSpacing),
           Text('Ellen Smith', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
           const SizedBox(height: 4),
           Text('Grade 7 - A', style: theme.textTheme.titleMedium?.copyWith(color: theme.hintColor)),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppStrings.largeSpacing),
           Divider(color: appColors?.announcementInfoBox ?? theme.dividerColor),
           const SizedBox(height: 12),
           Text(
@@ -109,20 +113,20 @@ class _StudentDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return BaseCardContainer(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: AppStrings.largeSpacing),
       color: theme.cardColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Student Details', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
-          const SizedBox(height: 16),
-          const _DetailRow(label: 'Date of Birth', value: '12/03/2008'),
-          const _DetailRow(label: 'Class', value: '7A'),
-          const _DetailRow(label: 'No. Absen', value: '7'),
-          const _DetailRow(label: 'No. HP', value: '12345678910'),
-          const _DetailRow(label: 'Nama Ibu', value: 'Sri Mulyani'),
-          const _DetailRow(label: 'Nama Ayah', value: 'Mulyono Widodo'),
-          const _DetailRow(label: 'Alamat', value: 'Jl. H.A. Salim no 32\nTaman, Madiun'),
+          Text(AppStrings.studentDetails, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+          const SizedBox(height: AppStrings.largeSpacing),
+          const _DetailRow(label: AppStrings.dateOfBirth, value: '12/03/2008'),
+          const _DetailRow(label: AppStrings.className, value: '7A'),
+          const _DetailRow(label: AppStrings.absenceNumber, value: '7'),
+          const _DetailRow(label: AppStrings.phoneNumber, value: '12345678910'),
+          const _DetailRow(label: AppStrings.motherName, value: 'Sri Mulyani'),
+          const _DetailRow(label: AppStrings.fatherName, value: 'Mulyono Widodo'),
+          const _DetailRow(label: AppStrings.address, value: 'Jl. H.A. Salim no 32\nTaman, Madiun'),
         ],
       ),
     );
@@ -171,7 +175,7 @@ class _ProfileActions extends StatelessWidget {
       children: [
         _ActionButton(
           icon: Icons.settings,
-          label: 'Settings',
+          label: AppStrings.settings,
           color: Colors.white,
           borderColor: theme.colorScheme.primary.withAlpha(60),
           textColor: theme.colorScheme.primary,
@@ -179,7 +183,7 @@ class _ProfileActions extends StatelessWidget {
         ),
         _ActionButton(
           icon: Icons.logout,
-          label: 'Log Out',
+          label: AppStrings.logOut,
           color: Colors.white,
           borderColor: theme.colorScheme.error.withAlpha(80),
           textColor: theme.colorScheme.error,
@@ -214,17 +218,17 @@ class _ActionButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           height: 60,
-          margin: const EdgeInsets.symmetric(horizontal: 8),
+          margin: const EdgeInsets.symmetric(horizontal: AppStrings.defaultSpacing),
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
             border: Border.all(color: borderColor, width: 2),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, color: textColor, size: 28),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppStrings.defaultSpacing),
               Text(label, style: TextStyle(fontSize: 18, color: textColor)),
             ],
           ),

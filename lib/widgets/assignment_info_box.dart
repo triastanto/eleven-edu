@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'base_info_box.dart';
+import '../constants/app_strings.dart';
 
 class AssignmentInfoBox extends StatelessWidget {
   final String message;
@@ -11,12 +12,12 @@ class AssignmentInfoBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return BaseInfoBox(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: AppStrings.largeSpacing),
       color: infoBoxColor ?? theme.colorScheme.secondary.withValues(alpha: 0x1A),
       child: Row(
         children: [
           Icon(Icons.info, color: iconColor ?? theme.colorScheme.secondary),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppStrings.defaultSpacing),
           Expanded(
             child: Text(
               message,

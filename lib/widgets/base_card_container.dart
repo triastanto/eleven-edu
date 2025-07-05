@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_strings.dart';
 
 class BaseCardContainer extends StatelessWidget {
   final Widget child;
@@ -22,7 +23,7 @@ class BaseCardContainer extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: color ?? theme.cardColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppStrings.largeSpacing),
         border: Border.all(color: theme.dividerColor.withValues(alpha: 0.3)),
         boxShadow: [
           BoxShadow(
