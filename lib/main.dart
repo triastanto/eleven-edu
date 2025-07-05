@@ -8,6 +8,7 @@ import 'screens/assignment_screen.dart';
 import 'screens/attendance_screen.dart';
 import 'screens/calendar_screen.dart';
 import 'widgets/app_top_section.dart';
+import 'screens/profile_student_screen.dart';
 
 /// Entry point of the application.
 void main() {
@@ -122,9 +123,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             onPressed: () {},
           ),
           const SizedBox(width: 8),
-          const CircleAvatar(
-            radius: 20,
-            backgroundImage: AssetImage('assets/profile_student.png'),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ProfileStudentScreen(),
+                ),
+              );
+            },
+            child: const CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage('assets/profile_student.png'),
+            ),
           ),
         ],
         padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
@@ -159,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       // Calendar
       AppTopSection(
         title: 'Calendar',
-        leading: Icon(Icons.calendar_today, color: theme.colorScheme.primary),
+        leading: Icon(Icons.calendar_month, color: theme.colorScheme.primary, size: 32),
         padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
       ),
     ];

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../constants/app_strings.dart';
 
 /// Calendar screen
 class CalendarScreen extends StatelessWidget {
@@ -9,32 +8,8 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        _CalendarHeader(),
-        Divider(height: 1),
         Expanded(child: _CalendarBody()),
       ],
-    );
-  }
-}
-
-class _CalendarHeader extends StatelessWidget {
-  const _CalendarHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 32, 16, 8),
-      child: Row(
-        children: [
-          Icon(Icons.calendar_month, color: theme.colorScheme.primary, size: 32),
-          const SizedBox(width: 8),
-          Text(
-            AppStrings.calendar,
-            style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
     );
   }
 }
