@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/app_top_section.dart';
 import '../widgets/base_card_container.dart';
 import '../theme/app_colors.dart';
 
@@ -11,21 +10,30 @@ class ProfileStudentScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      body: Column(
-        children: [
-          AppTopSection(
-            title: 'Profile',
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_rounded, color: theme.colorScheme.onSurface),
-              onPressed: () => Navigator.of(context).pop(),
-              tooltip: 'Back',
+      appBar: AppBar(
+        backgroundColor: theme.colorScheme.surface,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: theme.colorScheme.primary),
+          onPressed: () => Navigator.of(context).maybePop(),
+        ),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.person, color: theme.colorScheme.primary, size: 32),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                'Profile',
+                style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
-          ),
-          const Divider(height: 1),
-          const Expanded(child: _ProfileBody()),
-        ],
+          ],
+        ),
+        centerTitle: false,
       ),
+      body: const _ProfileBody(),
     );
   }
 }
@@ -65,7 +73,7 @@ class _ProfileCard extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 48,
-            backgroundImage: AssetImage('assets/profile_student.png'),
+            backgroundImage: AssetImage('assets/profile_student.jpg'),
           ),
           const SizedBox(height: 16),
           Text('Ellen Smith', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),

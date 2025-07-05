@@ -54,6 +54,12 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
 
+  assets:
+    # An asset is a file that is bundled and deployed with your app, and
+    # can be accessed at runtime. For Flutter packages, the directory
+    # `assets/` is reserved for assets that are used by the package itself.
+    - assets/
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

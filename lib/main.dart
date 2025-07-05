@@ -9,6 +9,7 @@ import 'screens/attendance_screen.dart';
 import 'screens/calendar_screen.dart';
 import 'widgets/app_top_section.dart';
 import 'screens/profile_student_screen.dart';
+import 'screens/announcement_screen.dart';
 
 /// Entry point of the application.
 void main() {
@@ -120,7 +121,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const AnnouncementScreen(),
+                ),
+              );
+            },
           ),
           const SizedBox(width: 8),
           GestureDetector(
@@ -133,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             },
             child: const CircleAvatar(
               radius: 20,
-              backgroundImage: AssetImage('assets/profile_student.png'),
+              backgroundImage: AssetImage('assets/profile_student.jpg'),
             ),
           ),
         ],

@@ -14,7 +14,7 @@ class StudentCard extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 24,
-            backgroundImage: AssetImage('assets/profile_student.png'),
+            backgroundImage: AssetImage('assets/profile_student.jpg'),
           ),
           const SizedBox(width: 12),
           Expanded(
