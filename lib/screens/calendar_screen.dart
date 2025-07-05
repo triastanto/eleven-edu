@@ -6,10 +6,42 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Expanded(child: _CalendarBody()),
-      ],
+    final theme = Theme.of(context);
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      appBar: AppBar(
+        backgroundColor: theme.colorScheme.surface,
+        elevation: 0,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.calendar_today, color: theme.colorScheme.primary, size: 32),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                'Calendar',
+                style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            color: theme.iconTheme.color,
+            onPressed: () {
+              // Implement more action
+            },
+          ),
+        ],
+      ),
+      body: const Column(
+        children: [
+          Expanded(child: _CalendarBody()),
+        ],
+      ),
     );
   }
 }

@@ -32,6 +32,15 @@ class ProfileStudentScreen extends StatelessWidget {
           ],
         ),
         centerTitle: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            color: theme.iconTheme.color,
+            onPressed: () {
+              // Implement more action
+            },
+          ),
+        ],
       ),
       body: const _ProfileBody(),
     );

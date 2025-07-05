@@ -22,40 +22,71 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Today', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
-                  Text('19 Juni 2025', style: theme.textTheme.bodyMedium),
-                ],
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      appBar: AppBar(
+        backgroundColor: theme.colorScheme.surface,
+        elevation: 0,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.check_circle, color: theme.colorScheme.primary, size: 32),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                'Kehadiran',
+                style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
               ),
-              const AttendanceStatusBadge(status: AttendanceStatus.present),
-            ],
-          ),
-          const SizedBox(height: 16),
-          AttendanceRangeDropdown(
-            value: _selectedRange,
-            items: _rangeItems,
-            onChanged: (val) {
-              if (val != null) setState(() => _selectedRange = val);
+            ),
+          ],
+        ),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            color: theme.iconTheme.color,
+            onPressed: () {
+              // Implement more action
             },
           ),
-          const SizedBox(height: 16),
-          const AttendanceSummarySection(),
-          const SizedBox(height: 24),
-          Text('Juni 2025', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
-          // Attendance records
-          const AttendanceRecordList(),
         ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Today', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                    Text('19 Juni 2025', style: theme.textTheme.bodyMedium),
+                  ],
+                ),
+                const AttendanceStatusBadge(status: AttendanceStatus.present),
+              ],
+            ),
+            const SizedBox(height: 16),
+            AttendanceRangeDropdown(
+              value: _selectedRange,
+              items: _rangeItems,
+              onChanged: (val) {
+                if (val != null) setState(() => _selectedRange = val);
+              },
+            ),
+            const SizedBox(height: 16),
+            const AttendanceSummarySection(),
+            const SizedBox(height: 24),
+            Text('Juni 2025', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            // Attendance records
+            const AttendanceRecordList(),
+          ],
+        ),
       ),
     );
   }

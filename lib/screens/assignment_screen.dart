@@ -15,13 +15,45 @@ class AssignmentScreen extends StatefulWidget {
 class _AssignmentScreenState extends State<AssignmentScreen> {
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      controller: widget.tabController,
-      children: [
-        _AllAssignmentsTab(),
-        const Center(child: Text('Belum ada tugas yang disubmit.')),
-        const Center(child: Text('Tidak ada tugas yang overdue.')),
-      ],
+    final theme = Theme.of(context);
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      appBar: AppBar(
+        backgroundColor: theme.colorScheme.surface,
+        elevation: 0,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.assignment, color: theme.colorScheme.primary, size: 32),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                'Daftar Tugas',
+                style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            color: theme.iconTheme.color,
+            onPressed: () {
+              // Implement more action
+            },
+          ),
+        ],
+      ),
+      body: TabBarView(
+        controller: widget.tabController,
+        children: [
+          _AllAssignmentsTab(),
+          const Center(child: Text('Belum ada tugas yang disubmit.')),
+          const Center(child: Text('Tidak ada tugas yang overdue.')),
+        ],
+      ),
     );
   }
 }

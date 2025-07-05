@@ -32,78 +32,81 @@ class AnnouncementScreen extends StatelessWidget {
           ],
         ),
         centerTitle: false,
-      ),
-      body: _AnnouncementBody(appColors: appColors),
-    );
-  }
-}
-
-class _AnnouncementBody extends StatelessWidget {
-  final AppColors? appColors;
-  const _AnnouncementBody({this.appColors});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16),
-          _SearchBar(),
-          const SizedBox(height: 16),
-          _CategoryTabs(),
-          const SizedBox(height: 8),
-          _MarkAllAsRead(),
-          const SizedBox(height: 8),
-          Expanded(
-            child: ListView(
-              children: [
-                _AnnouncementCard(
-                  icon: Icons.calendar_today_outlined,
-                  title: 'Jadwal Ujian Sudah Ada',
-                  category: 'Events',
-                  categoryColor: appColors?.announcementInfoBox ?? const Color(0xFFFFA76D),
-                  content: 'Jadwal ujian akhir semester T.A 2025 sudah ter...',
-                  date: 'May 14, 8:15 A.M',
-                ),
-                _AnnouncementCard(
-                  icon: Icons.flash_on,
-                  title: 'Libur Akhir Pekan di Majukan',
-                  category: 'Urgent',
-                  categoryColor: theme.colorScheme.error,
-                  content: 'Dikarenakan kondisi akhir pekan banyak kegiatan mak...',
-                  date: 'May 14, 8:15 A.M',
-                ),
-                _AnnouncementCard(
-                  icon: Icons.campaign,
-                  title: 'Tentang Bazar Tahunan',
-                  category: 'General',
-                  categoryColor: theme.colorScheme.primary.withAlpha(120),
-                  content: 'Informasi mengenai bazar tahunan yang akan diseleng...',
-                  date: 'May 14, 8:15 A.M',
-                ),
-                _AnnouncementCard(
-                  icon: Icons.campaign,
-                  title: 'Pengembalian Buku Perpustakaan',
-                  category: 'General',
-                  categoryColor: theme.colorScheme.primary.withAlpha(120),
-                  content: 'Dimohon seluruh siswa yang meminjam buku perpusta...',
-                  date: 'May 14, 8:15 A.M',
-                ),
-                _AnnouncementCard(
-                  icon: Icons.flash_on,
-                  title: 'Jadwal Ekstrakurikuler Dirubah',
-                  category: 'Events',
-                  categoryColor: appColors?.announcementInfoBox ?? const Color(0xFFFFA76D),
-                  content: 'Seluruh jadwal ekstrakurikuler akan dirubah karena penyes...',
-                  date: 'May 14, 8:15 A.M',
-                ),
-              ],
-            ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            color: theme.iconTheme.color,
+            onPressed: () {
+              // Implement more action
+            },
           ),
         ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(56),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: _SearchBar(),
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 8),
+            _CategoryTabs(),
+            const SizedBox(height: 8),
+            _MarkAllAsRead(),
+            const SizedBox(height: 8),
+            Expanded(
+              child: ListView(
+                children: [
+                  _AnnouncementCard(
+                    icon: Icons.calendar_today_outlined,
+                    title: 'Jadwal Ujian Sudah Ada',
+                    category: 'Events',
+                    categoryColor: appColors?.announcementInfoBox ?? const Color(0xFFFFA76D),
+                    content: 'Jadwal ujian akhir semester T.A 2025 sudah ter...',
+                    date: 'May 14, 8:15 A.M',
+                  ),
+                  _AnnouncementCard(
+                    icon: Icons.flash_on,
+                    title: 'Libur Akhir Pekan di Majukan',
+                    category: 'Urgent',
+                    categoryColor: theme.colorScheme.error,
+                    content: 'Dikarenakan kondisi akhir pekan banyak kegiatan mak...',
+                    date: 'May 14, 8:15 A.M',
+                  ),
+                  _AnnouncementCard(
+                    icon: Icons.campaign,
+                    title: 'Tentang Bazar Tahunan',
+                    category: 'General',
+                    categoryColor: theme.colorScheme.primary.withAlpha(120),
+                    content: 'Informasi mengenai bazar tahunan yang akan diseleng...',
+                    date: 'May 14, 8:15 A.M',
+                  ),
+                  _AnnouncementCard(
+                    icon: Icons.campaign,
+                    title: 'Pengembalian Buku Perpustakaan',
+                    category: 'General',
+                    categoryColor: theme.colorScheme.primary.withAlpha(120),
+                    content: 'Dimohon seluruh siswa yang meminjam buku perpusta...',
+                    date: 'May 14, 8:15 A.M',
+                  ),
+                  _AnnouncementCard(
+                    icon: Icons.flash_on,
+                    title: 'Jadwal Ekstrakurikuler Dirubah',
+                    category: 'Events',
+                    categoryColor: appColors?.announcementInfoBox ?? const Color(0xFFFFA76D),
+                    content: 'Seluruh jadwal ekstrakurikuler akan dirubah karena penyes...',
+                    date: 'May 14, 8:15 A.M',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
